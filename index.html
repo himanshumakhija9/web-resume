@@ -17,8 +17,8 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 1.1rem/1.55 "Source Serif 4",Georgia,serif;-webkit-font-smoothing:antialiased}
 h1,h2,h3,nav,.logo,.btn,.pill,.drow,.sh,.row b,summary,.role,.stat,.end,footer,.proof h3,.proof a{font-family:"Instrument Sans",system-ui,sans-serif}
 h1,h2,h3{margin:0 0 .5em;letter-spacing:-.025em;line-height:1.1}
-h1{font-size:clamp(2.4rem,6vw,4.4rem);font-weight:600;letter-spacing:-.04em;line-height:1.02}
-h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;margin:3em 0 .8em}
+h1{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:600;letter-spacing:-.035em;line-height:1.08}
+h2{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;margin:2.4em 0 .8em}
 h3{font-size:1.25rem;font-weight:600}
 a{color:inherit}
 .wrap{max-width:1100px;margin:0 auto;padding:0 28px 80px}
@@ -77,13 +77,18 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font-weight:400}
 details[open] summary::after{content:"\2212"}
 .ans{margin:0 0 28px;max-width:62ch}.ans ul{margin:.6em 0 0}.ans a{color:var(--ink)}
-.get{display:grid;grid-template-columns:1fr 1.2fr;gap:30px 60px;background:var(--tan);border-radius:24px;padding:48px;margin-top:90px;align-items:center}
-.get h2{margin:0 0 .3em}
-.get p{margin:0;color:var(--mut);font-size:1.2rem}
-.row{display:flex;justify-content:space-between;gap:4px 16px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--line);text-decoration:none}
-.row b{font-weight:500;font-size:1.1rem}
-.row span{color:var(--mut);font-size:.95rem}
-.row:hover b{color:var(--ink)}
+.get{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px;background:var(--tan);border-radius:24px;padding:26px 36px;margin-top:80px}
+.get h2{margin:0;font-size:clamp(1.4rem,2.4vw,1.8rem)}
+.get p{margin:6px 0 0;color:var(--mut);font-size:1.05rem}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.ic{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;background:var(--card);font:500 1rem "Instrument Sans",system-ui,sans-serif;text-decoration:none;color:var(--fg);transition:background .15s,color .15s}
+.ic svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ic svg.f{fill:currentColor;stroke:none}
+.ic:hover{background:var(--fg);color:var(--bg)}
+.jhead{display:flex;align-items:center;gap:16px;margin-bottom:.8em}
+.jhead h3{margin:0;font-size:1.7rem}
+.logo-b{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:56px;height:44px;padding:0 12px;border-radius:12px;font:700 .8rem/1 "Instrument Sans",system-ui,sans-serif;letter-spacing:.04em;overflow:hidden}
+.logo-b img{height:100%;width:auto;display:block}
 .end{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:12px;padding:34px 0 0;margin-top:50px}
 .end a{font-size:2rem;font-weight:600;letter-spacing:-.03em;text-decoration:none}
 .bicon{width:84px;height:84px;border-radius:22%;display:block;margin-bottom:18px}
@@ -94,7 +99,48 @@ details[open] summary::after{content:"\2212"}
 .bphoto{width:100%;border-radius:20px;display:block;margin-top:22px}
 @media (max-width:760px){.bsplit{grid-template-columns:1fr}}
 footer{margin-top:40px;font-size:.8rem;color:var(--mut);font-family:"Instrument Sans",sans-serif}
-@media (max-width:760px){.hero,.req,.get,.faqwrap{grid-template-columns:1fr}.job{padding:24px}.sheet{padding:4px 22px 10px}.get{padding:28px}}
+@media (max-width:760px){.hero,.req,.faqwrap{grid-template-columns:1fr}.job{padding:24px}.sheet{padding:4px 22px 10px}.get{padding:22px}.jhead h3{font-size:1.4rem}}
+
+@media (max-width:760px){
+body{font-size:1.02rem}
+.wrap{padding:0 18px 56px}
+header{padding:14px 0 6px;gap:8px 16px}
+.hr{width:100%;justify-content:space-between;gap:6px 12px}
+nav{gap:2px 18px;font-size:.95rem}
+nav a{padding:8px 0}
+.pill{padding:8px 16px;font-size:.95rem}
+.hero{padding:28px 0 16px;gap:16px}
+.lead{font-size:1.12rem;max-width:none}
+.portrait{width:132px;margin-bottom:6px}
+.cta{gap:8px}
+.cta .btn{flex:1 1 auto;text-align:center;padding:12px 16px}
+.card{padding:22px;border-radius:20px}
+.job{padding:20px;border-radius:20px}
+.job h3,.jhead h3{font-size:1.2rem}
+.jhead{gap:12px}
+.logo-b{min-width:48px;height:38px;font-size:.7rem}
+.drow{padding:10px 0;gap:12px;font-size:.95rem}
+.stats{grid-template-columns:repeat(3,1fr);gap:12px}
+.stat b{font-size:1.7rem}
+.stat span{font-size:.8rem}
+.tag{font-size:1.05rem}
+.sheet{padding:2px 18px 6px;border-radius:20px}
+.sh{padding:20px 0 16px;font-size:1rem}
+.req{padding:22px 0;gap:8px}
+.ask{font-size:1.15rem}
+summary{font-size:1.1rem;padding:18px 0}
+.ans{margin-bottom:20px}
+.get{padding:20px;margin-top:48px;border-radius:20px}
+.links{width:100%}
+.ic{flex:1 1 auto;justify-content:center;padding:11px 14px}
+.end a{font-size:1.4rem}
+.end{margin-top:32px;padding-top:22px;justify-content:flex-start}
+.bicon{width:64px;height:64px}
+.fimg{position:static}
+.himg{max-height:340px}
+.jimg{max-height:240px}
+}
+@media (max-width:380px){.stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -121,18 +167,18 @@ const ME = {
   resume: "https://drive.google.com/file/d/1csR3EDMAq-q4GOpakdA1nnVFXdZHhgBP/view?usp=sharing",   // latest resume link
   images: { portrait: PHOTOS.portrait },   // landing-page headshot
   builds: {   // the Beyond the résumé page: add a new item here for anything you do outside work; any application can override it with its own builds block
-    title: "The parts that don't fit on a résumé.",
+    title: "What I build and enjoy outside the day job.",
     lead: "What I build, say on stage and enjoy outside the day job.",
     items: [
-     { name:"Balavie", img: PHOTOS.balavie,
-       rows:[["Role","Product owner, designer and builder"],["Status","Live on Google Play, with a web version"]],
+     { name:"Balavie", title:"Founder and builder, AI health app", img: PHOTOS.balavie,
+       rows:[],
        tag:"An AI-first nutrition app I took from idea to Google Play on my own.",
        text:"You describe what you ate in your own words, by text or voice, or add a photo, and Balavie estimates calories, protein, carbohydrates, fat and fibre. It adds a daily Balance Score, a meal history, and warm, shame-free guidance. It is free, open source, and meal photos stay on your device.",
        points:["Built around plain-language meal logging: just say or write what you ate","Owned it end to end, from the first idea to a live Google Play listing"],
        skills:["Product thinking","AI-first design","Shipping to Google Play"],
        links:[["See it on Google Play ↗","https://play.google.com/store/apps/details?id=com.himanshumakhija.balavie"],["Try the web version ↗","https://balavie.ai.studio/"]] },
      { name:"Public speaker", photo: PHOTOS.awards, photoAlt: "Himanshu holding an award trophy at the LCS Conference and Awards 2026",
-       rows:[["Role","Speaker"],["Event","LCS Conference &amp; Awards 2026, Manchester, 23 September 2026"]],
+       rows:[],
        tag:"Speaking on organisational transformation.",
        stats:[["150+","continuous-improvement professionals at the sold-out conference"],["120","markets covered by the transformation programme I lead at Hilti"]],
        text:"I speak at conferences on organisational transformation, including Lean capability building and AI-first business transformation. In September 2026 I was one of the speakers at the LCS Conference &amp; Awards, whose theme was scaling an improvement culture.",
@@ -278,21 +324,27 @@ $("#logo").textContent = ME.name;
 $("#say").href = "mailto:" + ME.email;
 $("#foot").textContent = A.company ? "A personal portfolio for a role at " + A.company + ". Not affiliated with or endorsed by " + A.company + "." : A.footer;
 
+const LOGOS = {   // placeholder brand badges: put a real logo file in ME.logos, e.g. ME.logos["meesho"] = "images/meesho.svg"
+  "hilti-global":["#D2051E","#fff","HILTI"], "hilti-apac":["#D2051E","#fff","HILTI"],
+  "meesho":["#9F2089","#fff","meesho"], "kearney":["#2b2b2b","#fff","KEARNEY"],
+  "uhg":["#002677","#fff","UHG"], "bel":["#0b3d91","#fff","BEL"]
+};
+const logo = (id, org) => { const u = (ME.logos || {})[id], L = LOGOS[id]; return u ? '<span class="logo-b" style="background:#fff"><img src="' + u + '" alt="' + org + ' logo"></span>' : L ? '<span class="logo-b" style="background:' + L[0] + ';color:' + L[1] + '" role="img" aria-label="' + org + ' logo">' + L[2] + '</span>' : ""; };
 const jobs = () => A.careerOrder.map(id => {
   const c = CAREER.find(j => j.id === id);
   return c && Object.assign({}, c, A.overrides[id] || {});
 }).filter(Boolean);
 
-const contact = () => '<section class="get"><div><h2>Get in touch</h2>' + (A.contactLine ? '<p>' + A.contactLine + '</p>' : "") + '</div><div><a class="row" href="mailto:' + ME.email + '"><b>Say hello</b><span>' + ME.email + '</span></a><a class="row" href="' + ME.linkedin + '" target="_blank" rel="noopener"><b>LinkedIn ↗</b><span>linkedin.com/in/himanshu-makhija</span></a><a class="row" href="' + resume + '" target="_blank" rel="noopener"><b>View résumé ↗</b><span>Latest version</span></a></div></section><div class="end"><a href="#/">Back to the start →</a></div>';
+const contact = () => '<section class="get"><div><h2>Get in touch</h2>' + (A.contactLine ? '<p>' + A.contactLine + '</p>' : "") + '</div><div class="links"><a class="ic" href="mailto:' + ME.email + '" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg>Email</a><a class="ic" href="' + ME.linkedin + '" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.5H3V9.75Zm6.5 0h3.8v1.6h.05c.53-1 1.84-2.05 3.8-2.05 4.06 0 4.8 2.67 4.8 6.14v5.81h-4v-5.15c0-1.23-.02-2.8-1.7-2.8-1.7 0-1.96 1.33-1.96 2.7v5.25h-4V9.75Z"/></svg>LinkedIn</a><a class="ic" href="' + resume + '" target="_blank" rel="noopener" aria-label="Résumé"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Résumé</a></div></section><div class="end"><a href="#/">Back to the start →</a></div>';
 
 const H = t => '<h1 style="margin-top:44px">' + t + '</h1>';
 const pages = {
  "/": () => '<section class="hero"><p class="role">' + (A.company ? 'Applying for ' + A.role + ' at ' + A.company : A.role) + '</p><h1>' + A.headline + '</h1><div>' + img(IM.portrait, "portrait", "Himanshu Makhija") + '<p class="lead">' + A.intro + '</p></div><div class="cta">' + CTA.map((c, i) => '<a class="btn' + (i ? ' s' : '') + '" href="#/' + c[0] + '">' + c[1] + '</a>').join("") + '</div></section>' + img(IM.hero, "himg") + '<h2>' + (A.shortTitle || "The short version") + '</h2><div class="grid">' +
    A.short.map(s => '<div class="card"><h3>' + s[0] + '</h3><p>' + s[1] + '</p></div>').join("") + '</div>' + contact(),
  "/career": () => H(A.careerTitle || 'Nine years, five roles, one pattern.') + ((A.careerLead === undefined ? 'Find the problem, measure it, build the fix, get people to use it.' : A.careerLead) ? '<p class="lead">' + (A.careerLead === undefined ? 'Find the problem, measure it, build the fix, get people to use it.' : A.careerLead) + '</p>' : "") +
-   jobs().map(c => '<article class="job" id="' + c.id + '"><h3>' + c.title + '</h3><div class="drow"><span>Company</span><b>' + c.org + '</b></div><div class="drow"><span>Period</span><b>' + c.dates + '</b></div>' + img(c.img, "jimg") + '<p class="tag">' + c.tag + '</p><div class="stats">' +
+   jobs().map(c => '<article class="job" id="' + c.id + '"><div class="jhead">' + logo(c.id, c.org) + '<h3>' + c.title + '</h3></div><div class="drow"><span>Company</span><b>' + c.org + '</b></div><div class="drow"><span>Period</span><b>' + c.dates + '</b></div>' + img(c.img, "jimg") + '<p class="tag">' + c.tag + '</p><div class="stats">' +
    c.stats.map(s => '<div class="stat"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>').join("") + '</div><p>' + c.story + '</p><ul>' + li(c.bullets) + '</ul></article>').join("") + contact(),
- "/builds": () => H(B.title) + '<p class="lead">' + B.lead + '</p>' + B.items.map(b => '<article class="job">' + (b.img ? '<img class="bicon" src="' + b.img + '" alt="' + b.name + ' app icon">' : "") + '<h3>' + b.name + '</h3>' + b.rows.map(r => '<div class="drow"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>').join("") + '<p class="tag">' + b.tag + '</p>' + (b.photo ? '<div class="bsplit"><div>' : "") + (b.stats ? '<div class="stats">' + b.stats.map(x => '<div class="stat"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' : "") + '<p>' + b.text + '</p>' + (b.points ? '<ul>' + li(b.points) + '</ul>' : "") + (b.skills ? '<ul class="chips">' + li(b.skills) + '</ul>' : "") + '<div class="cta">' + b.links.map((l, i) => '<a class="btn' + (i ? ' s' : '') + '" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>').join("") + '</div>' + (b.photo ? '</div><img class="bphoto" src="' + b.photo + '" alt="' + (b.photoAlt || "") + '"></div>' : "") + '</article>').join("") + contact(),
+ "/builds": () => H(B.title) + B.items.map(b => '<article class="job">' + (b.img ? '<img class="bicon" src="' + b.img + '" alt="' + b.name + ' app icon">' : "") + '<h3>' + (b.title || b.name) + '</h3>' + b.rows.map(r => '<div class="drow"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>').join("") + '<p class="tag">' + b.tag + '</p>' + (b.photo ? '<div class="bsplit"><div>' : "") + (b.stats ? '<div class="stats">' + b.stats.map(x => '<div class="stat"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' : "") + '<p>' + b.text + '</p>' + (b.points ? '<ul>' + li(b.points) + '</ul>' : "") + (b.skills ? '<ul class="chips">' + li(b.skills) + '</ul>' : "") + '<div class="cta">' + b.links.map((l, i) => '<a class="btn' + (i ? ' s' : '') + '" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>').join("") + '</div>' + (b.photo ? '</div><img class="bphoto" src="' + b.photo + '" alt="' + (b.photoAlt || "") + '"></div>' : "") + '</article>').join("") + contact(),
  "/why": () => H('What the role asks for, and where I have done it.') + '<p class="lead">The posting for ' + A.role + ', summarised in my own words, with the closest thing I have done next to each part.</p><section class="sheet"><div class="sh"><b>' + A.role + ', ' + A.company + '</b><span>What the role asks for, summarised</span></div>' +
    A.reqs.map(r => '<div class="req"><p class="ask">' + mark(r.ask, r.hl) + '.</p><div class="proof"><h3>← ' + (r.label || "Where I have done this") + '</h3><ul>' + li(r.proof) + '</ul><a href="#/career" data-job="' + r.link + '">See it on the web résumé →</a></div></div>').join("") +
    '</section><h2>What I would bring, and what I would need to learn</h2><div class="two"><div><h3>What I would bring</h3><ul>' + li(A.bring) + '</ul></div><div><h3>What I would need to learn</h3><ul>' + li(A.learn) + '</ul></div></div>' + contact(),
