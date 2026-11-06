@@ -88,7 +88,7 @@ details[open] summary::after{content:"\2212"}
 .jhead{display:flex;align-items:center;gap:16px;margin-bottom:.8em}
 .jhead h3{margin:0;font-size:1.7rem}
 .logo-b{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:56px;height:44px;padding:0 12px;border-radius:12px;font:700 .8rem/1 "Instrument Sans",system-ui,sans-serif;letter-spacing:.04em;overflow:hidden}
-.logo-b img{height:100%;width:auto;display:block}
+.logo-b img{height:100%;width:auto;max-width:96px;object-fit:contain;display:block}
 .end{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:12px;padding:34px 0 0;margin-top:50px}
 .end a{font-size:2rem;font-weight:600;letter-spacing:-.03em;text-decoration:none}
 .bicon{width:84px;height:84px;border-radius:22%;display:block;margin-bottom:18px}
@@ -323,6 +323,12 @@ document.documentElement.style.setProperty("--acc", A.accent);
 $("#logo").textContent = ME.name;
 $("#say").href = "mailto:" + ME.email;
 $("#foot").textContent = A.company ? "A personal portfolio for a role at " + A.company + ". Not affiliated with or endorsed by " + A.company + "." : A.footer;
+
+ME.logos = Object.assign({
+  "hilti-global":"hilti%20logo.jpg", "hilti-apac":"hilti%20logo.jpg",
+  "meesho":"Meesho_logo.jpg", "kearney":"kearney%20logo.jpg",
+  "uhg":"UHG%20logo.jpg", "bel":"bel%20logo.jpg"
+}, ME.logos || {});
 
 const LOGOS = {   // placeholder brand badges: put a real logo file in ME.logos, e.g. ME.logos["meesho"] = "images/meesho.svg"
   "hilti-global":["#D2051E","#fff","HILTI"], "hilti-apac":["#D2051E","#fff","HILTI"],
