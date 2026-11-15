@@ -10,7 +10,7 @@
 <title>Himanshu Makhija</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Geist+Mono:wght@400&display=swap">
 <style>
-:root{--bg:#eeede6;--card:#faf9f5;--tan:#e2dccf;--fg:#141413;--mut:#5e5d57;--line:#d6d2c5;--acc:#d97757;--ink:#b4532f;color-scheme:light;
+:root{--bg:#f6f2ea;--card:#fffdf8;--tan:#ebe3d4;--fg:#1c1a16;--mut:#625f56;--line:#ddd6c6;--acc:#d97757;--ink:#b4532f;color-scheme:light;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
@@ -21,8 +21,11 @@ h1{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:600;letter-spacing:-.035em;lin
 h2{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;margin:2.4em 0 .8em}
 h3{font-size:1.25rem;font-weight:600}
 a{color:inherit}
-.wrap{max-width:1100px;margin:0 auto;padding:0 28px 80px}
-header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;padding:22px 0}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.pg{padding-bottom:80px}
+:root{--nav-h:68px;--rail-h:52px}
+header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.hd{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;min-height:var(--nav-h)}
 .logo{font-weight:600;font-size:1.05rem;text-decoration:none;letter-spacing:-.02em}
 .hr{display:flex;flex-wrap:wrap;align-items:center;gap:8px 28px}
 nav{display:flex;flex-wrap:wrap;gap:6px 26px;font-size:1rem}
@@ -103,8 +106,11 @@ footer{margin-top:40px;font-size:.8rem;color:var(--mut);font-family:"Instrument 
 
 @media (max-width:760px){
 body{font-size:1.02rem}
-.wrap{padding:0 18px 56px}
-header{padding:14px 0 6px;gap:8px 16px}
+.wrap{padding:0 18px}
+.pg{padding-bottom:56px}
+header.top{position:static}
+:root{--nav-h:0px}
+.hd{padding:14px 18px 6px;gap:8px 16px}
 .hr{width:100%;justify-content:space-between;gap:6px 12px}
 nav{gap:2px 18px;font-size:.95rem}
 nav a{padding:8px 0}
@@ -141,14 +147,56 @@ summary{font-size:1.1rem;padding:18px 0}
 .jimg{max-height:240px}
 }
 @media (max-width:380px){.stats{grid-template-columns:1fr 1fr}}
+
+/* ---- story / motion layer ---- */
+html{scroll-padding-top:calc(var(--nav-h) + var(--rail-h) + 8px)}
+.pghead{padding:56px 28px 36px}
+.eyebrow{font:500 .85rem "Instrument Sans",system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 12px}
+.pghead h1{max-width:20ch}
+.pghead .lead{margin-top:18px}
+.rail{position:sticky;top:var(--nav-h);z-index:30;height:var(--rail-h);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rail-list{display:flex;justify-content:center;align-items:center;gap:4px;height:100%;margin:0 auto;padding:0 20px;list-style:none;overflow-x:auto;scrollbar-width:none}
+.rail-list::-webkit-scrollbar{display:none}
+.rail-list li{margin:0;flex:none}
+.rail-list a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font:500 .95rem "Instrument Sans",system-ui,sans-serif;color:var(--mut);text-decoration:none;white-space:nowrap;transition:background .25s,color .25s}
+.rail-list a:hover{color:var(--fg)}
+.rail-list a.on{background:var(--fg);color:var(--bg)}
+.rail-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor;transition:background .25s}
+.rail-list a.past .rail-dot,.rail-list a.on .rail-dot{background:currentColor}
+.rail-progress{position:absolute;left:0;bottom:-1px;height:2px;width:calc(var(--p,0) * 100%);background:var(--acc);transition:width .12s linear}
+.cj{background:var(--tint);border-bottom:1px solid rgba(0,0,0,.05);scroll-margin-top:calc(var(--nav-h) + var(--rail-h))}
+.cj-in{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:"head head" "copy stats";gap:28px 64px;padding-top:56px;padding-bottom:72px}
+.cj-head{grid-area:head;display:flex;align-items:center;gap:16px}
+.cj-co{margin:0;font:600 1.15rem "Instrument Sans",system-ui,sans-serif;letter-spacing:-.02em}
+.cj-meta{margin:2px 0 0;font:400 .9rem "Instrument Sans",system-ui,sans-serif;color:var(--mut)}
+.cj-count{margin-left:auto;font:500 .85rem "Geist Mono",ui-monospace,monospace;color:var(--mut)}
+.cj-copy{grid-area:copy}
+.cj-copy h3{font-size:clamp(1.5rem,2.8vw,2.1rem);margin:0 0 .6em;max-width:22ch}
+.cj-tag{font:600 1.2rem/1.4 "Instrument Sans",system-ui,sans-serif;margin:0 0 1em;max-width:32ch}
+.cj-stats{grid-area:stats;display:grid;gap:14px;align-content:start}
+.cj-stats .stat{background:var(--card);border-radius:20px;padding:22px 24px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.cj-stats .stat b{font-size:2.3rem}
+.cj.on .cj-count{color:var(--ink)}
+/* scroll reveal */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media (max-width:760px){
+.pghead{padding:28px 18px 22px}
+.rail-list{justify-content:flex-start;padding:0 12px}
+.cj-in{grid-template-columns:1fr;grid-template-areas:"head" "copy" "stats";gap:20px;padding-top:36px;padding-bottom:44px}
+.cj-stats{grid-template-columns:repeat(3,1fr);gap:10px}
+.cj-stats .stat{padding:14px 12px;border-radius:16px}
+.cj-stats .stat b{font-size:1.5rem}
+.cj-tag{font-size:1.05rem}
+}
+@media (max-width:380px){.cj-stats{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header><a class="logo" href="#/" id="logo"></a><div class="hr"><nav id="nav"></nav><a class="pill" id="say">Say hello ↗</a></div></header>
+<header class="top"><div class="wrap hd"><a class="logo" href="#/" id="logo"></a><div class="hr"><nav id="nav"></nav><a class="pill" id="say">Say hello ↗</a></div></div></header>
 <main id="main"></main>
-<footer id="foot"></footer>
-</div>
+<div class="wrap"><footer id="foot"></footer></div>
 <script>
 /* PHOTOS: embedded so the page works anywhere. On your own host you can use paths like "images/headshot.jpg" instead. */
 const PHOTOS = {
@@ -185,10 +233,10 @@ const ME = {
        stats:[["150+","continuous-improvement professionals at the sold-out conference"],["120","markets covered by the transformation programme I lead at Hilti"]],
        text:"I speak at conferences on organisational transformation, including Lean capability building and AI-first business transformation. In September 2026 I was one of the speakers at the LCS Conference &amp; Awards, whose theme was scaling an improvement culture.",
        links:[["See the conference showcase ↗","https://lcs.leancompetency.org/lcs-conference-awards-2026-showcase"]] },
-      { name:"Racket sports and running", title:"Racket sports and running enthusiast", photos:[[PHOTOS.running,"Himanshu after a 5 km run"],[PHOTOS.badminton,"Himanshu with friends at a badminton court"]],
+      { name:"Racket sports and running", title:"Racket sports and running enthusiast", photos:[[PHOTOS.running,"Himanshu after a 5 km run"],[PHOTOS.badminton,"Himanshu with teammates at a badminton court"]],
         rows:[],
-        tag:"I am passionate about racket sports.",
-        text:"I play badminton and squash. I also like to run." }
+        tag:"I play to win, and I play with a team.",
+        text:"I am passionate about racket sports. I play badminton and squash, and I also like to run. Most of all I love team sports: playing alongside other people is where I learn the most about working with them, and it is how I like to work at the office too." }
     ]
   },
   
@@ -262,53 +310,27 @@ const APPS = {
    ["What do you do outside work?","I am passionate about racket sports. I play badminton and squash. I also like to run."]
   ]
  },
- mistral: {
-  company: "Mistral AI",
-  role: "Business & Operations Partner, Solutions",
-  accent: "#d97757",
-  headline: "Hi, I'm Himanshu, and I want to build the operating system behind Mistral's Solutions team.",
-  intro: "Nine years of turning strategy into repeatable operations, most recently across 120 markets and 60+ service centers at Hilti. I'd like to do the same for the team that deploys AI into high-stakes industries.",
-  short: [
-    ["Hilti HQ","Global strategy and operations lead. 1.5% of the annual cost book saved so far in 2026 and AI-enabled process management across 60+ service centers."],
-    ["Meesho","Designed NPS measurement and lifted it 18 points in 6 months, then owned the post-purchase roadmap."],
-    ["Kearney","Six engagements across industries. Built the store-level ordering model that cut material costs 30%."]
-  ],
-  careerOrder: ["hilti-global","hilti-apac","meesho","kearney","uhg"],
+
+ /* ---- TEMPLATE: a "Why <company>" application ----------------------------------
+    To tailor the site for one specific role, copy this block, remove the comment markers,
+    rename the key (e.g. acme), fill it in, and open the site with ?for=acme
+    Adding "reqs" turns on a "Why <company>" tab that lines up what the role asks for
+    against what you have done.
+
+ acme: {
+  company: "Acme", role: "Role title", accent: "#d97757",
+  headline: "Hi, I'm Himanshu, and I want to ... at Acme.",
+  intro: "Two or three sentences on why you, for this team.",
+  short: [ ["Hilti HQ","One line that matters for this role."], ["Meesho","..."], ["Kearney","..."] ],
+  careerOrder: ["hilti-global","hilti-apac","meesho","kearney","uhg"],   // which jobs to show, and in what order
   overrides: {},   // e.g. { "meesho": { story: "..." } } to retell a job for this role
-  reqs: [
-   { ask:"Bring structure to ambiguity and drive cross-functional work from strategy to execution", hl:"Bring structure to ambiguity",
-     proof:["Run a 120-market programme at Hilti HQ with an 11-member cross-functional team","Took the smart-locker pilot from spec to SAP integration to rollout in Germany and Japan"], link:"hilti-global" },
-   { ask:"Optimise processes and move business KPIs", hl:"Optimise processes",
-     proof:["1.5% of the annual cost book saved in 2026 so far, up from 0.8% last year","Repair turnaround cut 12.5%; CX score up 34 points"], link:"hilti-global" },
-   { ask:"Build internal tools and data workflows", hl:"internal tools and data workflows",
-     proof:["AI-driven routing, an AI-enabled shopfloor platform and a continuous-improvement AI platform at Hilti","Excel VBA ordering model, R reporting automation (40+ hours a month saved), SQL investigations at Meesho"], link:"kearney" },
-   { ask:"Design ROI and value frameworks, and turn data into decisions", hl:"Design ROI and value frameworks",
-     proof:["Own the global cost optimisation portfolio and report hard savings separately from efficiency gains","Reporting built for markets and service centers to act on, not just read"], link:"hilti-global" },
-   { ask:"Stand up customer satisfaction measurement", hl:"customer satisfaction measurement",
-     proof:["Designed Meesho's NPS measurement; +18 points in 6 months","Built an NPS-prediction model at UnitedHealth Group (accuracy 55% to 70%)"], link:"meesho" },
-   { ask:"AI fluency: use cases, implementation and scaling challenges", hl:"AI fluency",
-     proof:["Deployed AI speech-to-text coaching in US customer services (+9% on-call sales revenue, +12% CSAT)","Published ML researcher (Expert Systems, Wiley, 2021); Agentic AI among my working tools"], link:"hilti-apac" }
-  ],
-  bring: [
-   "Nine years of strategy and operations, now running a global programme at Hilti HQ",
-   "A builder's habits: VBA, R, SQL, low-code tools and AI platforms put into live processes",
-   "Measurable results: 1.5% of the annual cost book saved, CX +34 points, NPS +18 points",
-   "Change that sticks across geographies: standard workflows, lean upskilling, adoption by the people doing the work",
-   "Native English and Hindi, French at A2 to B1, and a home base in Paris"
-  ],
-  learn: [
-   "How Deployment Strategists scope and deliver today, and where the friction really is",
-   "Mistral's internal ROI framework and the data foundation behind it",
-   "How security and compliance shape delivery in finance, defence and the public sector",
-   "Technical sales and solutions engineering up close. My background is operations and customer experience, so I would go deepest here first"
-  ],
-  faq: [
-   ["Why Mistral?","Mistral builds full-stack AI with enterprises in high-stakes industries and lets them run it on their terms. For three years my job has been getting AI to work inside real operations at scale. I'd like to do that for the team that deploys it."],
-   ["Why this role?","It combines three things I have done separately: building internal tools, measuring value, and codifying ways of working across many markets. This role asks for all three together."],
-   ["What are you working on now?","At Hilti HQ I am rolling out AI-enabled process management across 60+ service centers, running the global cost optimisation portfolio, and launching a lean upskilling programme for operators."],
-   ["Do you build things yourself?","Yes. SQL, Python, R, VBA and low-code tools, plus Power BI, Figma, SAP and Signavio. I like turning a manual process into a system that other people actually use."]
-  ]
+  reqs: [ { ask:"What the posting asks for", hl:"phrase to highlight", proof:["Where you did it","Another proof point"], link:"hilti-global" } ],
+  bring: ["What you would bring"],
+  learn: ["What you would need to learn"],
+  faq: []
  }
+ ------------------------------------------------------------------------------- */
+
 };
 
 /* =====================================================================
@@ -318,7 +340,8 @@ const key = new URLSearchParams(location.search).get("for");
 const A = APPS[key] || APPS[Object.keys(APPS)[0]];
 const IM = Object.assign({}, ME.images, A.images);
 const B = A.builds || ME.builds;
-const CTA = (A.reqs ? [["why", "Why this role"]] : []).concat([["career", "Web résumé"]], B ? [["builds", "Beyond the résumé"]] : []);
+const WHY = A.company ? "Why " + A.company : "Why this role";
+const CTA = (A.reqs ? [["why", WHY]] : []).concat([["career", "Web résumé"]], B ? [["builds", "Beyond the résumé"]] : []);
 const $ = s => document.querySelector(s);
 const li = a => a.map(x => "<li>" + x + "</li>").join("");
 const img = (src, cls, alt) => src ? '<img class="' + cls + '" src="' + src + '" alt="' + (alt || "") + '">' : "";
@@ -353,22 +376,88 @@ const H = t => '<h1 style="margin-top:44px">' + t + '</h1>';
 const pages = {
  "/": () => '<section class="hero"><p class="role">' + (A.company ? 'Applying for ' + A.role + ' at ' + A.company : A.role) + '</p><h1>' + A.headline + '</h1><div>' + img(IM.portrait, "portrait", "Himanshu Makhija") + '<p class="lead">' + A.intro + '</p></div><div class="cta">' + CTA.map((c, i) => '<a class="btn' + (i ? ' s' : '') + '" href="#/' + c[0] + '">' + c[1] + '</a>').join("") + '</div></section>' + img(IM.hero, "himg") + '<h2>' + (A.shortTitle || "The short version") + '</h2><div class="grid">' +
    A.short.map(s => '<div class="card"><h3>' + s[0] + '</h3><p>' + s[1] + '</p></div>').join("") + '</div>' + contact(),
- "/career": () => H(A.careerTitle || 'Nine years, five roles, one pattern.') + ((A.careerLead === undefined ? 'Find the problem, measure it, build the fix, get people to use it.' : A.careerLead) ? '<p class="lead">' + (A.careerLead === undefined ? 'Find the problem, measure it, build the fix, get people to use it.' : A.careerLead) + '</p>' : "") +
-   jobs().map(c => '<article class="job" id="' + c.id + '"><div class="jhead">' + logo(c.id, c.org) + '<h3>' + c.title + '</h3></div><div class="drow"><span>Company</span><b>' + c.org + '</b></div><div class="drow"><span>Period</span><b>' + c.dates + '</b></div>' + img(c.img, "jimg") + '<p class="tag">' + c.tag + '</p><div class="stats">' +
-   c.stats.map(s => '<div class="stat"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>').join("") + '</div><p>' + c.story + '</p><ul>' + li(c.bullets) + '</ul></article>').join("") + contact(),
+ "/career": () => {
+   const J = jobs(), n = J.length, two = x => String(x).padStart(2, "0");
+   const kick = { "hilti-global": "Today", "hilti-apac": "The move into operations", "meesho": "Product at marketplace scale", "kearney": "Consulting across industries", "uhg": "Where the machine learning began", "bel": "The first research" };
+   const tints = ["#f3e4d6", "#e2ebdd", "#dde8ee", "#e9e3f1", "#f2e0dc", "#f1ecd2"];
+   const lead = A.careerLead === undefined ? "Scroll through, or jump to a company. Newest first." : A.careerLead;
+   return '<div class="wrap pghead"><p class="eyebrow rv">Career</p><h1 class="rv">' + (A.careerTitle || "Nine years, five roles, one pattern.") + '</h1>' + (lead ? '<p class="lead rv">' + lead + '</p>' : "") + '</div>' +
+   '<div class="journey"><nav class="rail" aria-label="Companies"><ol class="rail-list">' + J.map(c => '<li><a href="#/career" data-go="' + c.id + '"><span class="rail-dot"></span>' + c.org + '</a></li>').join("") + '</ol><span class="rail-progress"></span></nav>' +
+   J.map((c, k) => '<section class="cj" id="' + c.id + '" style="--tint:' + tints[k % tints.length] + '"><div class="wrap cj-in">' +
+     '<div class="cj-head rv">' + logo(c.id, c.org) + '<div><p class="cj-co">' + c.org + '</p><p class="cj-meta">' + c.dates + '</p></div><span class="cj-count">' + two(k + 1) + ' / ' + two(n) + '</span></div>' +
+     '<div class="cj-copy"><p class="eyebrow rv">' + (kick[c.id] || "") + '</p><h3 class="rv">' + c.title + '</h3>' + img(c.img, "jimg") + '<p class="cj-tag rv">' + c.tag + '</p><p class="rv">' + c.story + '</p><ul class="rv">' + li(c.bullets) + '</ul></div>' +
+     '<div class="cj-stats">' + c.stats.map(x => '<div class="stat rv"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' +
+   '</div></section>').join("") + '</div><div class="wrap pg">' + contact() + '</div>';
+ },
  "/builds": () => H(B.title) + B.items.map(b => '<article class="job">' + (b.img ? '<img class="bicon" src="' + b.img + '" alt="' + b.name + ' app icon">' : "") + '<h3>' + (b.title || b.name) + '</h3>' + b.rows.map(r => '<div class="drow"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>').join("") + '<p class="tag">' + b.tag + '</p>' + (b.photo ? '<div class="bsplit"><div>' : "") + (b.stats ? '<div class="stats">' + b.stats.map(x => '<div class="stat"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' : "") + '<p>' + b.text + '</p>' + (b.points ? '<ul>' + li(b.points) + '</ul>' : "") + (b.skills ? '<ul class="chips">' + li(b.skills) + '</ul>' : "") + (b.links ? '<div class="cta">' + b.links.map((l, i) => '<a class="btn' + (i ? ' s' : '') + '" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>').join("") + '</div>' : "") + (b.photos ? '<div class="bgal">' + b.photos.map(p => '<img src="' + p[0] + '" alt="' + p[1] + '">').join("") + '</div>' : "") + (b.photo ? '</div><img class="bphoto" src="' + b.photo + '" alt="' + (b.photoAlt || "") + '"></div>' : "") + '</article>').join("") + contact(),
  "/why": () => H('What the role asks for, and where I have done it.') + '<p class="lead">The posting for ' + A.role + ', summarised in my own words, with the closest thing I have done next to each part.</p><section class="sheet"><div class="sh"><b>' + A.role + ', ' + A.company + '</b><span>What the role asks for, summarised</span></div>' +
    A.reqs.map(r => '<div class="req"><p class="ask">' + mark(r.ask, r.hl) + '.</p><div class="proof"><h3>← ' + (r.label || "Where I have done this") + '</h3><ul>' + li(r.proof) + '</ul><a href="#/career" data-job="' + r.link + '">See it on the web résumé →</a></div></div>').join("") +
    '</section><h2>What I would bring, and what I would need to learn</h2><div class="two"><div><h3>What I would bring</h3><ul>' + li(A.bring) + '</ul></div><div><h3>What I would need to learn</h3><ul>' + li(A.learn) + '</ul></div></div>' + contact()
 };
 
-const navItems = [["/", "Home"], ["/career", "Web résumé"]].concat(B ? [["/builds", "Beyond the résumé"]] : [], A.reqs ? [["/why", "Why this role"]] : []);
+const navItems = [["/", "Home"], ["/career", "Web résumé"]].concat(B ? [["/builds", "Beyond the résumé"]] : [], A.reqs ? [["/why", WHY]] : []);
+
+/* ---- motion: scroll reveal, count-up, journey rail ---- */
+document.documentElement.classList.add("js");
+let _io, _cnt, _scr;
+function countUp(el) {
+  const t = el.textContent; if (!/\d/.test(t) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const t0 = performance.now(), D = 1100;
+  const step = now => {
+    const p = Math.min(1, (now - t0) / D), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = p >= 1 ? t : t.replace(/\d+(\.\d+)?/g, m => { const d = (m.split(".")[1] || "").length; return (parseFloat(m) * e).toFixed(d); });
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+function enhance(path) {
+  if (_io) _io.disconnect(); if (_scr) removeEventListener("scroll", _scr);
+  const main = $("#main");
+  if (path !== "/career") {
+    main.querySelectorAll(".hero > *, .card, .job, .req, .sheet .sh, .two > div, .get, main h1, main h2, .lead").forEach((el, i) => el.classList.add("rv"));
+  }
+  const els = [...main.querySelectorAll(".rv")];
+  const stagger = new Map();
+  if ("IntersectionObserver" in window) {
+    _io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target; _io.unobserve(el);
+      const sib = el.parentElement ? [...el.parentElement.children].filter(c => c.classList.contains("rv")) : [];
+      el.style.setProperty("--d", Math.min(sib.indexOf(el), 5) * 0.09 + "s");
+      el.classList.add("in");
+      const b = el.matches(".stat") ? el.querySelector("b") : null; if (b) countUp(b);
+    }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    els.forEach(el => _io.observe(el));
+  } else els.forEach(el => el.classList.add("in"));
+  const rail = main.querySelector(".rail");
+  if (rail) {
+    const secs = [...main.querySelectorAll(".cj")], links = [...rail.querySelectorAll("a")], first = secs[0], last = secs[secs.length - 1];
+    rail.addEventListener("click", e => {
+      const a = e.target.closest("a[data-go]"); if (!a) return; e.preventDefault();
+      const t = document.getElementById(a.dataset.go); if (t) t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+    let cur = -1;
+    _scr = () => {
+      const y = scrollY + innerHeight * 0.35, top = first.offsetTop, end = last.offsetTop + last.offsetHeight;
+      rail.style.setProperty("--p", Math.max(0, Math.min(1, (scrollY + innerHeight * 0.35 - top) / (end - top))).toFixed(4));
+      let k = -1; secs.forEach((s2, idx) => { if (s2.offsetTop <= y) k = idx; });
+      if (k !== cur) {
+        cur = k;
+        links.forEach((a, idx) => { a.classList.toggle("on", idx === k); a.classList.toggle("past", idx < k); });
+        secs.forEach((s2, idx) => s2.classList.toggle("on", idx === k));
+        const al = links[k]; if (al) { const L = rail.querySelector(".rail-list"); L.scrollTo({ left: al.offsetLeft - L.clientWidth / 2 + al.clientWidth / 2, behavior: "smooth" }); }
+      }
+    };
+    addEventListener("scroll", _scr, { passive: true }); _scr();
+  }
+}
 function route() {
   const p = (location.hash.slice(1) || "/").split("?")[0];
   const path = pages[p] && (p !== "/why" || A.reqs) && (p !== "/builds" || B) ? p : "/";
   $("#nav").innerHTML = navItems.map(n => '<a href="#' + n[0] + '"' + (n[0] === path ? ' class="on"' : "") + ">" + n[1] + "</a>").join("");
-  $("#main").innerHTML = pages[path]();
-  window.scrollTo(0, 0);
+  $("#main").innerHTML = path === "/career" ? pages[path]() : '<div class="wrap pg">' + pages[path]() + "</div>";
+  window.scrollTo({ top: 0, behavior: "instant" });
+  enhance(path);
 }
 document.addEventListener("click", e => {
   const a = e.target.closest("a[data-job]");
