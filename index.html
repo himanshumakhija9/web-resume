@@ -187,14 +187,15 @@ html{scroll-padding-top:calc(var(--nav-h) + var(--rail-h) + 8px)}
 .pghead{padding:28px 18px 22px}
 .rail-list{justify-content:flex-start;padding:0 12px}
 .cj-in{grid-template-columns:1fr;grid-template-areas:"head" "copy" "stats";gap:20px;padding-top:36px;padding-bottom:44px}
-.cj-stats{grid-template-columns:repeat(3,1fr);gap:10px}
-.cj-stats .stat{padding:14px 12px;border-radius:16px}
-.cj-stats .stat b{font-size:1.5rem}
+.cj-stats{grid-template-columns:1fr;gap:10px}
+.cj-stats .stat{display:grid;grid-template-columns:minmax(96px,.42fr) 1fr;gap:6px 16px;align-items:center;padding:16px 18px;border-radius:16px}
+.cj-stats .stat b{font-size:1.55rem;margin:0}
+.cj-stats .stat span{font-size:.92rem;line-height:1.4}
 .cj-side .stat{padding:18px 20px}.cj-side .stat b{font-size:1.8rem}
 .polas{max-width:360px}
 .cj-tag{font-size:1.05rem}
 }
-@media (max-width:380px){.cj-stats{grid-template-columns:1fr 1fr}}
+@media (max-width:380px){.cj-stats .stat{grid-template-columns:1fr}}
 
 /* ---- home + beyond: interactive layer ---- */
 #prog{position:fixed;top:0;left:0;height:3px;width:calc(var(--sp,0) * 100%);background:var(--acc);z-index:60;pointer-events:none}
@@ -297,11 +298,74 @@ html{scroll-padding-top:calc(var(--nav-h) + var(--rail-h) + 8px)}
 .nc-art .draw{stroke-dashoffset:0;transition:none}.nc-art .pop,.nc-art .bar,.nc-art .hl,.nc-art .hi{transform:none;opacity:1;transition:none}
 .rcta::before{transition:none}
 }
+
+/* ---- mobile experience ---- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button{-webkit-tap-highlight-color:transparent}
+#burger{display:none}
+#menu{display:none}
+#totop{display:none}
+@media (max-width:760px){
+:root{--nav-h:58px;--rail-h:54px}
+html.nh{--nav-h:0px}
+header.top{position:sticky;top:0;z-index:55;transition:transform .32s cubic-bezier(.2,.7,.2,1),background .25s}
+html.nh header.top{transform:translateY(-100%)}
+html.menu-open header.top{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}
+.hd{min-height:58px;padding:0 max(18px,env(safe-area-inset-left));flex-wrap:nowrap;gap:12px}
+.hr{display:none}
+.logo{font-size:1.02rem}
+#burger{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:46px;height:46px;margin-right:-10px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--fg);cursor:pointer}
+#burger span{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .2s}
+html.menu-open #burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+html.menu-open #burger span:nth-child(2){opacity:0}
+html.menu-open #burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#menu{display:block;position:fixed;inset:0;z-index:50;background:var(--bg);padding-top:58px;visibility:hidden;opacity:0;transform:translateY(-14px);transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1),visibility 0s .4s;overflow-y:auto;overscroll-behavior:contain}
+html.menu-open #menu{visibility:visible;opacity:1;transform:none;transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1)}
+#menu::before{content:"";position:absolute;right:-30%;top:10%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--acc) 24%,transparent),transparent 68%);pointer-events:none}
+.menu-in{position:relative;min-height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:22px max(24px,env(safe-area-inset-left)) calc(28px + env(safe-area-inset-bottom))}
+#menu-links{display:flex;flex-direction:column;gap:0}
+#menu-links a{display:flex;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;font:600 1.9rem/1.15 "Instrument Sans",system-ui,sans-serif;letter-spacing:-.03em;opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s cubic-bezier(.2,.7,.2,1);transition-delay:0s}
+#menu-links a small{font:500 .8rem "Geist Mono",ui-monospace,monospace;color:var(--mut);letter-spacing:0}
+#menu-links a.on{color:var(--ink)}
+#menu-links a.on::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--acc);align-self:center;margin-left:auto}
+html.menu-open #menu-links a{opacity:1;transform:none;transition-delay:calc(.08s + var(--i) * .07s)}
+.menu-foot{margin-top:36px}
+.menu-foot p{margin:0 0 12px;font:500 .85rem "Instrument Sans",system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+#menu-ic .links{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#menu-ic .ic{justify-content:center;min-height:48px}
+#menu-ic .ic:last-child{grid-column:1/-1}
+html{scroll-padding-top:calc(var(--nav-h) + var(--rail-h) + 8px)}
+.rail{transition:top .32s cubic-bezier(.2,.7,.2,1)}
+.rail-list{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 28px),transparent);scroll-snap-type:x proximity}
+.rail-list li{scroll-snap-align:center}
+.rail-list a{min-height:44px;padding:0 16px;font-size:1rem}
+.btn,.ic,.rcta-btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+.wrap{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+.hero{padding-top:20px}
+.hero h1{font-size:clamp(1.9rem,8.2vw,2.4rem)}
+.pghead h1{font-size:clamp(1.9rem,8.2vw,2.4rem)}
+.nc:active{transform:scale(.97)}
+.nc:active .nc-art{box-shadow:none}
+.rcta:active::before{clip-path:circle(150% at var(--cx,80%) var(--cy,50%))}
+.rcta .pap{animation:bob 4.5s ease-in-out infinite}
+.srow:active{background:color-mix(in srgb,var(--tan) 50%,transparent)}
+.marq-t{animation-duration:30s}
+#totop{display:grid;place-items:center;position:fixed;right:max(16px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:45;width:48px;height:48px;border:0;border-radius:50%;background:var(--fg);color:var(--bg);box-shadow:0 10px 24px -8px rgba(0,0,0,.5);cursor:pointer;opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .3s,transform .3s}
+#totop.show{opacity:1;transform:none;pointer-events:auto}
+html.menu-open #totop{opacity:0;pointer-events:none}
+#totop svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.get{margin-bottom:8px}
+.end a{display:inline-block;padding:10px 0}
+}
+@keyframes bob{0%,100%{transform:rotate(4deg) translateY(0)}50%{transform:rotate(2deg) translateY(-8px)}}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){#menu-links a{opacity:1;transform:none;transition:none}.rcta .pap{animation:none}header.top,#menu{transition:none}}
 </style>
 </head>
 <body>
 <div id="prog" aria-hidden="true"></div>
-<header class="top"><div class="wrap hd"><a class="logo" href="#/" id="logo"></a><div class="hr"><nav id="nav"></nav><a class="pill" id="say">Say hello ↗</a></div></div></header>
+<header class="top"><div class="wrap hd"><a class="logo" href="#/" id="logo"></a><div class="hr"><nav id="nav"></nav><a class="pill" id="say">Say hello ↗</a></div><button id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button></div></header>
+<div id="menu" aria-hidden="true"><div class="menu-in"><nav id="menu-links" aria-label="Main menu"></nav><div class="menu-foot"><p>Say hello</p><div id="menu-ic"></div></div></div></div>
+<button id="totop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <main id="main"></main>
 <div class="wrap"><footer id="foot"></footer></div>
 <script>
@@ -610,9 +674,40 @@ function enhance(path) {
   _scr = () => { if (!tick) { tick = true; requestAnimationFrame(update); } };
   addEventListener("scroll", _scr, { passive: true }); update();
 }
+
+/* ---- mobile menu, header auto-hide, back-to-top ---- */
+const burger = $("#burger"), menuEl = $("#menu"), topBtn = $("#totop"), root = document.documentElement;
+const mq = matchMedia("(max-width: 760px)");
+function setMenu(on) {
+  root.classList.toggle("menu-open", on);
+  burger.setAttribute("aria-expanded", on); burger.setAttribute("aria-label", on ? "Close menu" : "Open menu");
+  menuEl.setAttribute("aria-hidden", !on);
+  document.body.style.overflow = on ? "hidden" : "";
+  if (on) root.classList.remove("nh");
+}
+function buildMenu(path) {
+  $("#menu-links").innerHTML = navItems.map((n, i) => '<a href="#' + n[0] + '"' + (n[0] === path ? ' class="on"' : "") + ' style="--i:' + i + '"><small>' + String(i + 1).padStart(2, "0") + "</small>" + n[1] + "</a>").join("");
+  $("#menu-ic").innerHTML = (contact().match(/<div class="links">[\s\S]*?<\/div>/) || ['<div class="links"></div>'])[0].replace('class="links"', 'class="links"');
+}
+burger.addEventListener("click", () => setMenu(!root.classList.contains("menu-open")));
+menuEl.addEventListener("click", e => { if (e.target.closest("a") || e.target === menuEl) setMenu(false); });
+addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+mq.addEventListener("change", () => setMenu(false));
+topBtn.addEventListener("click", () => scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+let lastY = 0;
+addEventListener("scroll", () => {
+  const y = scrollY, dy = y - lastY;
+  topBtn.classList.toggle("show", y > 700);
+  if (mq.matches && !root.classList.contains("menu-open")) {
+    if (y < 80 || dy < -6) root.classList.remove("nh"); else if (dy > 6) root.classList.add("nh");
+  }
+  lastY = y;
+}, { passive: true });
 function route() {
   const p = (location.hash.slice(1) || "/").split("?")[0];
   const path = pages[p] && (p !== "/why" || A.reqs) && (p !== "/builds" || B) ? p : "/";
+  setMenu(false); root.classList.remove("nh"); lastY = 0;
+  buildMenu(path);
   $("#nav").innerHTML = navItems.map(n => '<a href="#' + n[0] + '"' + (n[0] === path ? ' class="on"' : "") + ">" + n[1] + "</a>").join("");
   $("#main").innerHTML = path === "/career" || path === "/builds" ? pages[path]() : '<div class="wrap pg">' + pages[path]() + "</div>";
   window.scrollTo({ top: 0, behavior: "instant" });
