@@ -173,7 +173,9 @@ html{scroll-padding-top:calc(var(--nav-h) + var(--rail-h) + 8px)}
 .cj-copy{grid-area:copy}
 .cj-copy h3{font-size:clamp(1.5rem,2.8vw,2.1rem);margin:0 0 .6em;max-width:22ch}
 .cj-tag{font:600 1.2rem/1.4 "Instrument Sans",system-ui,sans-serif;margin:0 0 1em;max-width:32ch}
-.cj-stats{grid-area:stats;display:grid;gap:14px;align-content:start}
+.cj-stats,.cj-side{grid-area:stats;display:grid;gap:14px;align-content:start}
+.cj-side .stat{background:var(--card);border-radius:20px;padding:22px 24px}
+.cj-side .stat b{font-size:2.3rem}
 .cj-stats .stat{background:var(--card);border-radius:20px;padding:22px 24px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
 .cj-stats .stat b{font-size:2.3rem}
 .cj.on .cj-count{color:var(--ink)}
@@ -188,12 +190,117 @@ html{scroll-padding-top:calc(var(--nav-h) + var(--rail-h) + 8px)}
 .cj-stats{grid-template-columns:repeat(3,1fr);gap:10px}
 .cj-stats .stat{padding:14px 12px;border-radius:16px}
 .cj-stats .stat b{font-size:1.5rem}
+.cj-side .stat{padding:18px 20px}.cj-side .stat b{font-size:1.8rem}
+.polas{max-width:360px}
 .cj-tag{font-size:1.05rem}
 }
 @media (max-width:380px){.cj-stats{grid-template-columns:1fr 1fr}}
+
+/* ---- home + beyond: interactive layer ---- */
+#prog{position:fixed;top:0;left:0;height:3px;width:calc(var(--sp,0) * 100%);background:var(--acc);z-index:60;pointer-events:none}
+.pg{overflow-x:clip}
+.hero{position:relative}
+.blob{position:absolute;right:-6%;top:-40px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--acc) 26%,transparent),transparent 68%);filter:blur(10px);transform:translateY(var(--by,0));z-index:-1;pointer-events:none}
+.role::before{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 50%,transparent)}50%{box-shadow:0 0 0 7px transparent}}
+.js .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.js .w>span{display:inline-block;transform:translateY(110%);transition:transform .85s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i) * .05s + .05s)}
+.js .split.in .w>span{transform:none}
+.navcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:72px}
+.nc{display:block;text-decoration:none;color:inherit;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.nc:hover{transform:translateY(-6px)}
+.nc-art{aspect-ratio:16/10;border-radius:22px;background:var(--t);display:grid;place-items:center;overflow:hidden;transition:box-shadow .35s}
+.nc:hover .nc-art{box-shadow:0 18px 36px -18px rgba(0,0,0,.28)}
+.nc-art svg{width:78%;height:auto;overflow:visible;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.nc:hover .nc-art svg{transform:scale(1.07)}
+.nc h3{display:flex;justify-content:space-between;align-items:center;margin:16px 0 6px;font-size:1.25rem}
+.nc .arr{display:inline-block;transition:transform .3s}
+.nc:hover .arr{transform:translateX(6px)}
+.nc p{margin:0;color:var(--mut);font-size:.98rem}
+.nc-art .draw{stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.4s cubic-bezier(.4,.1,.2,1) .2s}
+.nc.in .draw{stroke-dashoffset:0}
+.nc-art .pop{transform-box:fill-box;transform-origin:center;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(.35s + var(--i) * .22s)}
+.nc.in .pop{transform:none}
+.nc-art .bar{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0);transition:transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(.15s + var(--i) * .15s)}
+.nc.in .bar{transform:none}
+.nc-art .hl{transform-box:fill-box;transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.7,.2,1) .4s}
+.nc.in .hl{transform:none}
+.nc-art .hi{transform-box:fill-box;transform-origin:center;transform:translateY(14px) scale(.6);opacity:0;transition:transform .5s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+.nc:hover .hi,.nc.in .hi{transform:none;opacity:1}
+.nc-art .flap{transform-box:fill-box;transform-origin:top;transition:transform .45s}
+.nc:hover .flap{transform:scaleY(-.6) translateY(4px)}
+.srows{border-top:1px solid var(--line)}
+.srow{display:grid;grid-template-columns:minmax(150px,.7fr) 2fr;gap:12px 40px;padding:26px 0;border-bottom:1px solid var(--line);transition:padding .35s,background .35s}
+.srow:hover{padding-left:14px}
+.srow .sl{font:600 1.15rem "Instrument Sans",system-ui,sans-serif;transition:color .3s}
+.srow:hover .sl{color:var(--ink)}
+.srow p{margin:0;font-size:1.1rem}
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:56px}
+.numi b{display:block;font:600 clamp(2rem,4vw,3rem)/1 "Instrument Sans",system-ui,sans-serif;letter-spacing:-.04em;margin-bottom:10px}
+.numi span{display:block;color:var(--mut);font-size:.95rem;max-width:24ch;border-top:2px solid var(--acc);padding-top:10px}
+.marq{margin-top:72px}
+.marq-v{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq-t{display:flex;gap:12px;width:max-content;animation:marq 38s linear infinite}
+.marq-v:hover .marq-t{animation-play-state:paused}
+.marq-t span{flex:none;padding:12px 22px;border-radius:999px;background:var(--tan);font:500 1rem "Instrument Sans",system-ui,sans-serif;transition:background .25s,color .25s,transform .25s}
+.marq-t span:hover{background:var(--fg);color:var(--bg);transform:translateY(-2px)}
+.marq-t .sep{padding:0;width:12px;background:none}
+@keyframes marq{to{transform:translateX(calc(-50% - 6px))}}
+.rcta{position:relative;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:24px;margin-top:80px;padding:48px 52px;border-radius:32px;background:var(--fg);color:var(--bg);text-decoration:none;overflow:hidden;isolation:isolate}
+.rcta::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--acc);clip-path:circle(0 at var(--cx,80%) var(--cy,50%));transition:clip-path .7s cubic-bezier(.2,.7,.2,1)}
+.rcta:hover::before{clip-path:circle(150% at var(--cx,80%) var(--cy,50%))}
+.rcta .eyebrow{color:color-mix(in srgb,var(--bg) 65%,transparent);transition:color .4s}
+.rcta h2{margin:0 0 12px;font-size:clamp(1.8rem,3.6vw,2.8rem)}
+.rcta p{margin:0 0 24px;max-width:34ch}
+.rcta-btn{display:inline-flex;align-items:center;gap:12px;padding:13px 22px;border-radius:999px;background:var(--bg);color:var(--fg);font:600 1rem "Instrument Sans",system-ui,sans-serif}
+.rcta-btn i{font-style:normal;display:inline-block;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.rcta:hover .rcta-btn i{transform:translate(3px,-3px) rotate(45deg)}
+.rcta-paper{display:grid;place-items:center;perspective:900px}
+.pap{width:min(240px,100%);aspect-ratio:3/4;background:#fffdf8;border-radius:10px;padding:22px 20px;box-shadow:0 30px 50px -20px rgba(0,0,0,.55);transform:rotate(4deg) rotateY(calc(var(--rx,0) * 10deg)) rotateX(calc(var(--ry,0) * -10deg));transition:transform .25s ease-out;display:flex;flex-direction:column;gap:11px}
+.rcta:hover .pap{transform:rotate(0) rotateY(calc(var(--rx,0) * 12deg)) rotateX(calc(var(--ry,0) * -12deg)) translateY(-8px)}
+.pap em{font:700 .8rem "Instrument Sans",system-ui,sans-serif;font-style:normal;color:#25231f;letter-spacing:-.01em}
+.pap u{display:block;height:7px;border-radius:4px;text-decoration:none;background:linear-gradient(90deg,#d8d2c4 0 40%,#ece7da 50%,#d8d2c4 60%) 0 0/250% 100%;animation:shim 2.6s linear infinite;animation-delay:calc(var(--k,0) * .2s)}
+.pap u:nth-of-type(2n){width:84%}.pap u:nth-of-type(3n){width:66%}.pap u:nth-of-type(1){width:92%;background:#25231f;animation:none;height:9px}
+@keyframes shim{to{background-position:-250% 0}}
+.get.flash{animation:flash 1.4s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 70%,transparent)}100%{box-shadow:0 0 0 26px transparent}}
+/* beyond the résumé panels */
+.bigicon{display:grid;place-items:center;aspect-ratio:16/9;border-radius:22px;background:var(--card)}
+.bigicon img{width:128px;height:128px;border-radius:30px;object-fit:cover;box-shadow:0 18px 34px -14px rgba(0,0,0,.35);animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px) rotate(-2deg)}}
+.fig{margin:0;border-radius:22px;overflow:hidden;aspect-ratio:1/1;background:var(--card)}
+.fig img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block;transform:translateY(var(--py,0)) scale(1.12)}
+.polas{position:relative;padding:6px 0 24px}
+.pol{margin:0;background:#fffdf8;padding:10px 10px 30px;border-radius:6px;box-shadow:0 18px 30px -16px rgba(0,0,0,.4);width:78%;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.pol img{width:100%;display:block;border-radius:3px}
+.pol.p1{transform:rotate(-2.5deg)}
+.pol.p2{transform:rotate(2.5deg);margin:-46px 0 0 22%;position:relative}
+.polas:hover .pol.p1{transform:rotate(-1deg) translateX(-6px)}
+.polas:hover .pol.p2{transform:rotate(1deg) translateX(6px)}
+.cj-copy .cta{margin-top:22px}
+.cj-copy .chips{margin:16px 0 0}
+@media (max-width:760px){
+.navcards{margin-top:44px;gap:22px}
+.srow{grid-template-columns:1fr;padding:20px 0}
+.numbers{grid-template-columns:1fr 1fr;gap:26px 16px;margin-top:40px}
+.marq{margin-top:48px}
+.rcta{grid-template-columns:1fr;padding:30px 24px;margin-top:48px;border-radius:24px}
+.rcta-paper{order:-1;justify-self:start}
+.pap{width:150px;padding:14px 12px}
+.blob{width:320px;height:320px;right:-30%}
+.bigicon{aspect-ratio:auto;padding:22px}
+.polas{padding-bottom:14px}
+}
+@media (prefers-reduced-motion:reduce){
+.marq-t,.pap u,.bigicon img,.role::before{animation:none}
+.js .w>span{transform:none;transition:none}
+.nc-art .draw{stroke-dashoffset:0;transition:none}.nc-art .pop,.nc-art .bar,.nc-art .hl,.nc-art .hi{transform:none;opacity:1;transition:none}
+.rcta::before{transition:none}
+}
 </style>
 </head>
 <body>
+<div id="prog" aria-hidden="true"></div>
 <header class="top"><div class="wrap hd"><a class="logo" href="#/" id="logo"></a><div class="hr"><nav id="nav"></nav><a class="pill" id="say">Say hello ↗</a></div></div></header>
 <main id="main"></main>
 <div class="wrap"><footer id="foot"></footer></div>
@@ -240,7 +347,9 @@ const ME = {
     ]
   },
   
-  linkedin: "https://www.linkedin.com/in/himanshu-makhija"
+  linkedin: "https://www.linkedin.com/in/himanshu-makhija",
+ tools: ["SQL","Python","R","Agentic AI","Power BI","JIRA","Figma","Excel VBA","SAP","Signavio","Low-code tools"],   // scrolling strip on the home page
+ numbers: [["9 years","across machine learning, consulting, product and operations"],["120","markets covered by the programme I lead at Hilti"],["60+","service centers moving to AI-enabled shopfloor management"],["+34 pts","CX score across 9 APAC markets, from 44% to 78%"]]   // counters on the home page; override per application with numbers: [...]
 };
 
 const CAREER = [
@@ -370,18 +479,38 @@ const jobs = () => A.careerOrder.map(id => {
   return c && Object.assign({}, c, A.overrides[id] || {});
 }).filter(Boolean);
 
-const contact = () => '<section class="get"><div><h2>Get in touch</h2>' + (A.contactLine ? '<p>' + A.contactLine + '</p>' : "") + '</div><div class="links"><a class="ic" href="mailto:' + ME.email + '" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg>Email</a><a class="ic" href="' + ME.linkedin + '" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.5H3V9.75Zm6.5 0h3.8v1.6h.05c.53-1 1.84-2.05 3.8-2.05 4.06 0 4.8 2.67 4.8 6.14v5.81h-4v-5.15c0-1.23-.02-2.8-1.7-2.8-1.7 0-1.96 1.33-1.96 2.7v5.25h-4V9.75Z"/></svg>LinkedIn</a><a class="ic" href="' + resume + '" target="_blank" rel="noopener" aria-label="Résumé"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Résumé</a></div></section><div class="end"><a href="#/">Back to the start →</a></div>';
+const contact = () => '<section class="get" id="contact"><div><h2>Get in touch</h2>' + (A.contactLine ? '<p>' + A.contactLine + '</p>' : "") + '</div><div class="links"><a class="ic" href="mailto:' + ME.email + '" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7.5 8 6 8-6"/></svg>Email</a><a class="ic" href="' + ME.linkedin + '" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="f" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.5H3V9.75Zm6.5 0h3.8v1.6h.05c.53-1 1.84-2.05 3.8-2.05 4.06 0 4.8 2.67 4.8 6.14v5.81h-4v-5.15c0-1.23-.02-2.8-1.7-2.8-1.7 0-1.96 1.33-1.96 2.7v5.25h-4V9.75Z"/></svg>LinkedIn</a><a class="ic" href="' + resume + '" target="_blank" rel="noopener" aria-label="Résumé"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7.5A2.5 2.5 0 0 0 5 5.5v13A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Résumé</a></div></section><div class="end"><a href="#/">Back to the start →</a></div>';
 
 const H = t => '<h1 style="margin-top:44px">' + t + '</h1>';
+const split = t => t.split(" ").map((w, i) => '<span class="w"><span style="--i:' + i + '">' + w + "</span></span>").join(" ");
+const ART = {
+  career: '<svg viewBox="0 0 300 180" aria-hidden="true"><path class="draw" pathLength="100" d="M34 140 C70 118 78 88 112 104 S160 138 196 96 S246 52 266 46" fill="none" stroke="#25231f" stroke-width="3" stroke-linecap="round"/><g fill="#25231f"><circle class="pop" style="--i:0" cx="34" cy="140" r="9"/><circle class="pop" style="--i:1" cx="86" cy="94" r="9"/><circle class="pop" style="--i:2" cx="128" cy="118" r="9"/><circle class="pop" style="--i:3" cx="204" cy="88" r="9"/><circle class="pop" style="--i:4" cx="266" cy="46" r="11"/></g></svg>',
+  builds: '<svg viewBox="0 0 300 180" aria-hidden="true"><g fill="#25231f"><rect class="bar" style="--i:0" x="70" y="96" width="46" height="56" rx="12" opacity=".35"/><rect class="bar" style="--i:1" x="127" y="62" width="46" height="90" rx="12" opacity=".6"/><rect class="bar" style="--i:2" x="184" y="28" width="46" height="124" rx="12"/></g><circle class="pop" style="--i:4" cx="207" cy="16" r="6" fill="#d97757"/></svg>',
+  contact: '<svg viewBox="0 0 300 180" aria-hidden="true"><g class="hi"><rect x="168" y="22" width="84" height="40" rx="20" fill="#25231f"/><text x="210" y="48" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="18" font-weight="600" fill="#fff">hello</text></g><rect x="68" y="70" width="164" height="92" rx="12" fill="#fffdf8" stroke="#25231f" stroke-width="3"/><path class="flap" d="M72 76 L150 126 L228 76" fill="none" stroke="#25231f" stroke-width="3" stroke-linejoin="round"/></svg>',
+  why: '<svg viewBox="0 0 300 180" aria-hidden="true"><rect x="70" y="52" width="160" height="12" rx="6" fill="#25231f" opacity=".25"/><rect class="hl" x="70" y="84" width="104" height="22" rx="6" fill="#f2d95c"/><rect x="70" y="88" width="130" height="12" rx="6" fill="#25231f" opacity=".3"/><rect x="70" y="124" width="140" height="12" rx="6" fill="#25231f" opacity=".25"/></svg>'
+};
 const pages = {
- "/": () => '<section class="hero"><p class="role">' + (A.company ? 'Applying for ' + A.role + ' at ' + A.company : A.role) + '</p><h1>' + A.headline + '</h1><div>' + img(IM.portrait, "portrait", "Himanshu Makhija") + '<p class="lead">' + A.intro + '</p></div><div class="cta">' + CTA.map((c, i) => '<a class="btn' + (i ? ' s' : '') + '" href="#/' + c[0] + '">' + c[1] + '</a>').join("") + '</div></section>' + img(IM.hero, "himg") + '<h2>' + (A.shortTitle || "The short version") + '</h2><div class="grid">' +
-   A.short.map(s => '<div class="card"><h3>' + s[0] + '</h3><p>' + s[1] + '</p></div>').join("") + '</div>' + contact(),
+ "/": () => {
+   const cards = [];
+   if (A.reqs) cards.push(["why", "#/why", WHY, "What the role asks for, lined up next to what I have actually done.", "#e4e7f0"]);
+   cards.push(["career", "#/career", "Web résumé", "Nine years, newest first. Scroll the story or jump straight to a company.", "#ece5d8"]);
+   if (B) cards.push(["builds", "#/builds", "Beyond the résumé", "An app on Google Play, a conference stage, and a lot of time on the courts.", "#e1eadb"]);
+   cards.push(["contact", "#/", "Get in touch", "Email, LinkedIn or the résumé, all in one place.", "#f3dfd2"]);
+   const NUM = A.numbers || ME.numbers, TOOLS = ME.tools || [];
+   const chips = TOOLS.map(t => "<span>" + t + "</span>").join("");
+   return '<section class="hero"><span class="blob" aria-hidden="true"></span><p class="role rv">' + (A.company ? 'Applying for ' + A.role + ' at ' + A.company : A.role) + '</p><h1 class="split">' + split(A.headline) + '</h1><div>' + img(IM.portrait, "portrait rv", "Himanshu Makhija") + '<p class="lead rv">' + A.intro + '</p></div><div class="cta rv">' + CTA.map((c, i) => '<a class="btn' + (i ? ' s' : '') + '" href="#/' + c[0] + '">' + c[1] + '</a>').join("") + '</div></section>' + img(IM.hero, "himg") +
+   '<section class="navcards">' + cards.map(c => '<a class="nc rv" href="' + c[1] + '"' + (c[0] === "contact" ? ' data-scroll="contact"' : "") + ' style="--t:' + c[4] + '"><div class="nc-art">' + ART[c[0]] + '</div><h3>' + c[2] + '<span class="arr">→</span></h3><p>' + c[3] + '</p></a>').join("") + '</section>' +
+   '<h2 class="split">' + split(A.shortTitle || "The short version") + '</h2><div class="srows">' + A.short.map(x => '<div class="srow rv"><span class="sl">' + x[0] + '</span><p>' + x[1] + '</p></div>').join("") + '</div>' +
+   (NUM ? '<div class="numbers">' + NUM.map(x => '<div class="numi rv"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' : "") +
+   (TOOLS.length ? '<div class="marq rv"><p class="eyebrow">Tools I reach for</p><div class="marq-v"><div class="marq-t">' + chips + '<span class="sep" aria-hidden="true"></span>' + chips.replace(/<span>/g, '<span aria-hidden="true">') + '</div></div></div>' : "") +
+   '<a class="rcta rv" href="' + resume + '" target="_blank" rel="noopener"><div class="rcta-txt"><p class="eyebrow">The full picture</p><h2>Read the full résumé</h2><p>Roles, results, education and skills, in one document.</p><span class="rcta-btn">Open the résumé <i>↗</i></span></div><div class="rcta-paper" aria-hidden="true"><div class="pap"><em>' + ME.name + '</em><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></div></div></a>' + contact();
+ },
  "/career": () => {
    const J = jobs(), n = J.length, two = x => String(x).padStart(2, "0");
    const kick = { "hilti-global": "Today", "hilti-apac": "The move into operations", "meesho": "Product at marketplace scale", "kearney": "Consulting across industries", "uhg": "Where the machine learning began", "bel": "The first research" };
    const tints = ["#f3e4d6", "#e2ebdd", "#dde8ee", "#e9e3f1", "#f2e0dc", "#f1ecd2"];
    const lead = A.careerLead === undefined ? "Scroll through, or jump to a company. Newest first." : A.careerLead;
-   return '<div class="wrap pghead"><p class="eyebrow rv">Career</p><h1 class="rv">' + (A.careerTitle || "Nine years, five roles, one pattern.") + '</h1>' + (lead ? '<p class="lead rv">' + lead + '</p>' : "") + '</div>' +
+   return '<div class="wrap pghead"><p class="eyebrow rv">Career</p><h1 class="split">' + split(A.careerTitle || "Nine years, five roles, one pattern.") + '</h1>' + (lead ? '<p class="lead rv">' + lead + '</p>' : "") + '</div>' +
    '<div class="journey"><nav class="rail" aria-label="Companies"><ol class="rail-list">' + J.map(c => '<li><a href="#/career" data-go="' + c.id + '"><span class="rail-dot"></span>' + c.org + '</a></li>').join("") + '</ol><span class="rail-progress"></span></nav>' +
    J.map((c, k) => '<section class="cj" id="' + c.id + '" style="--tint:' + tints[k % tints.length] + '"><div class="wrap cj-in">' +
      '<div class="cj-head rv">' + logo(c.id, c.org) + '<div><p class="cj-co">' + c.org + '</p><p class="cj-meta">' + c.dates + '</p></div><span class="cj-count">' + two(k + 1) + ' / ' + two(n) + '</span></div>' +
@@ -389,7 +518,23 @@ const pages = {
      '<div class="cj-stats">' + c.stats.map(x => '<div class="stat rv"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' +
    '</div></section>').join("") + '</div><div class="wrap pg">' + contact() + '</div>';
  },
- "/builds": () => H(B.title) + B.items.map(b => '<article class="job">' + (b.img ? '<img class="bicon" src="' + b.img + '" alt="' + b.name + ' app icon">' : "") + '<h3>' + (b.title || b.name) + '</h3>' + b.rows.map(r => '<div class="drow"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>').join("") + '<p class="tag">' + b.tag + '</p>' + (b.photo ? '<div class="bsplit"><div>' : "") + (b.stats ? '<div class="stats">' + b.stats.map(x => '<div class="stat"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") + '</div>' : "") + '<p>' + b.text + '</p>' + (b.points ? '<ul>' + li(b.points) + '</ul>' : "") + (b.skills ? '<ul class="chips">' + li(b.skills) + '</ul>' : "") + (b.links ? '<div class="cta">' + b.links.map((l, i) => '<a class="btn' + (i ? ' s' : '') + '" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>').join("") + '</div>' : "") + (b.photos ? '<div class="bgal">' + b.photos.map(p => '<img src="' + p[0] + '" alt="' + p[1] + '">').join("") + '</div>' : "") + (b.photo ? '</div><img class="bphoto" src="' + b.photo + '" alt="' + (b.photoAlt || "") + '"></div>' : "") + '</article>').join("") + contact(),
+ "/builds": () => {
+   const I = B.items, n = I.length, two = x => String(x).padStart(2, "0");
+   const slug = t => "b-" + t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+   const tints = ["#e2ebdd", "#e9e3f1", "#f3e4d6", "#dde8ee"];
+   const kick = { "Balavie": "Builder", "Public speaker": "On stage", "Racket sports and running": "Off the clock" };
+   return '<div class="wrap pghead"><p class="eyebrow rv">Beyond the résumé</p><h1 class="split">' + split(B.title) + '</h1><p class="lead rv">Scroll through, or jump to one.</p></div>' +
+   '<div class="journey"><nav class="rail" aria-label="Sections"><ol class="rail-list">' + I.map(b => '<li><a href="#/builds" data-go="' + slug(b.name) + '"><span class="rail-dot"></span>' + b.name + '</a></li>').join("") + '</ol><span class="rail-progress"></span></nav>' +
+   I.map((b, k) => '<section class="cj" id="' + slug(b.name) + '" style="--tint:' + tints[k % tints.length] + '"><div class="wrap cj-in">' +
+     '<div class="cj-head rv"><div><p class="cj-co">' + b.name + '</p><p class="cj-meta">' + (b.kicker || kick[b.name] || "") + '</p></div><span class="cj-count">' + two(k + 1) + ' / ' + two(n) + '</span></div>' +
+     '<div class="cj-copy"><h3 class="rv">' + (b.title || b.name) + '</h3><p class="cj-tag rv">' + b.tag + '</p><p class="rv">' + b.text + '</p>' + (b.points ? '<ul class="rv">' + li(b.points) + '</ul>' : "") + (b.skills ? '<ul class="chips rv">' + li(b.skills) + '</ul>' : "") +
+       (b.links ? '<div class="cta rv">' + b.links.map((l, i) => '<a class="btn' + (i ? ' s' : '') + '" href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '</a>').join("") + '</div>' : "") + '</div>' +
+     '<div class="cj-side">' + (b.img ? '<div class="bigicon rv"><img src="' + b.img + '" alt="' + b.name + ' app icon"></div>' : "") +
+       (b.stats ? b.stats.map(x => '<div class="stat rv"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>').join("") : "") +
+       (b.photo ? '<figure class="fig rv"><img data-par src="' + b.photo + '" alt="' + (b.photoAlt || "") + '"></figure>' : "") +
+       (b.photos ? '<div class="polas rv">' + b.photos.map((p, i) => '<figure class="pol p' + (i + 1) + '"><img src="' + p[0] + '" alt="' + p[1] + '"></figure>').join("") + '</div>' : "") + '</div>' +
+   '</div></section>').join("") + '</div><div class="wrap pg">' + contact() + '</div>';
+ },
  "/why": () => H('What the role asks for, and where I have done it.') + '<p class="lead">The posting for ' + A.role + ', summarised in my own words, with the closest thing I have done next to each part.</p><section class="sheet"><div class="sh"><b>' + A.role + ', ' + A.company + '</b><span>What the role asks for, summarised</span></div>' +
    A.reqs.map(r => '<div class="req"><p class="ask">' + mark(r.ask, r.hl) + '.</p><div class="proof"><h3>← ' + (r.label || "Where I have done this") + '</h3><ul>' + li(r.proof) + '</ul><a href="#/career" data-job="' + r.link + '">See it on the web résumé →</a></div></div>').join("") +
    '</section><h2>What I would bring, and what I would need to learn</h2><div class="two"><div><h3>What I would bring</h3><ul>' + li(A.bring) + '</ul></div><div><h3>What I would need to learn</h3><ul>' + li(A.learn) + '</ul></div></div>' + contact()
@@ -412,34 +557,47 @@ function countUp(el) {
 }
 function enhance(path) {
   if (_io) _io.disconnect(); if (_scr) removeEventListener("scroll", _scr);
-  const main = $("#main");
-  if (path !== "/career") {
-    main.querySelectorAll(".hero > *, .card, .job, .req, .sheet .sh, .two > div, .get, main h1, main h2, .lead").forEach((el, i) => el.classList.add("rv"));
-  }
-  const els = [...main.querySelectorAll(".rv")];
-  const stagger = new Map();
+  const main = $("#main"), RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (path === "/why") main.querySelectorAll(".card, .job, .req, .sheet .sh, .get, h1, h2, .lead").forEach(el => el.classList.add("rv"));
+  const els = [...main.querySelectorAll(".rv, .split")];
   if ("IntersectionObserver" in window) {
     _io = new IntersectionObserver(es => es.forEach(e => {
       if (!e.isIntersecting) return;
       const el = e.target; _io.unobserve(el);
-      const sib = el.parentElement ? [...el.parentElement.children].filter(c => c.classList.contains("rv")) : [];
-      el.style.setProperty("--d", Math.min(sib.indexOf(el), 5) * 0.09 + "s");
+      if (!el.classList.contains("split")) {
+        const sib = el.parentElement ? [...el.parentElement.children].filter(c => c.classList.contains("rv")) : [];
+        el.style.setProperty("--d", Math.min(sib.indexOf(el), 5) * 0.09 + "s");
+      }
       el.classList.add("in");
-      const b = el.matches(".stat") ? el.querySelector("b") : null; if (b) countUp(b);
+      const b = el.matches(".stat, .numi") ? el.querySelector("b") : null; if (b) countUp(b);
     }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
     els.forEach(el => _io.observe(el));
   } else els.forEach(el => el.classList.add("in"));
-  const rail = main.querySelector(".rail");
-  if (rail) {
-    const secs = [...main.querySelectorAll(".cj")], links = [...rail.querySelectorAll("a")], first = secs[0], last = secs[secs.length - 1];
-    rail.addEventListener("click", e => {
-      const a = e.target.closest("a[data-go]"); if (!a) return; e.preventDefault();
-      const t = document.getElementById(a.dataset.go); if (t) t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-    });
-    let cur = -1;
-    _scr = () => {
-      const y = scrollY + innerHeight * 0.35, top = first.offsetTop, end = last.offsetTop + last.offsetHeight;
-      rail.style.setProperty("--p", Math.max(0, Math.min(1, (scrollY + innerHeight * 0.35 - top) / (end - top))).toFixed(4));
+
+  main.querySelectorAll(".rcta").forEach(r => r.addEventListener("mousemove", e => {
+    const b = r.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+    r.style.setProperty("--cx", (x * 100).toFixed(1) + "%"); r.style.setProperty("--cy", (y * 100).toFixed(1) + "%");
+    r.style.setProperty("--rx", ((x - .5) * 2).toFixed(2)); r.style.setProperty("--ry", ((y - .5) * 2).toFixed(2));
+  }));
+
+  const rail = main.querySelector(".rail"), prog = $("#prog"), pars = [...main.querySelectorAll("[data-par]")], blobs = [...main.querySelectorAll(".blob")];
+  const secs = [...main.querySelectorAll(".cj")], links = rail ? [...rail.querySelectorAll("a")] : [];
+  if (rail) rail.addEventListener("click", e => {
+    const a = e.target.closest("a[data-go]"); if (!a) return; e.preventDefault();
+    const t = document.getElementById(a.dataset.go); if (t) t.scrollIntoView({ behavior: RM ? "auto" : "smooth" });
+  });
+  let cur = -1, tick = false;
+  const update = () => {
+    tick = false;
+    const h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.setProperty("--sp", h > 0 ? Math.min(1, scrollY / h).toFixed(4) : 0);
+    if (!RM) {
+      pars.forEach(p => { const r = p.getBoundingClientRect(), c = r.top + r.height / 2 - innerHeight / 2; p.style.setProperty("--py", Math.max(-26, Math.min(26, -c * 0.07)).toFixed(1) + "px"); });
+      blobs.forEach(bl => bl.style.setProperty("--by", (scrollY * 0.18).toFixed(0) + "px"));
+    }
+    if (rail && secs.length) {
+      const first = secs[0], last = secs[secs.length - 1], y = scrollY + innerHeight * 0.35, top = first.offsetTop, end = last.offsetTop + last.offsetHeight;
+      rail.style.setProperty("--p", Math.max(0, Math.min(1, (y - top) / (end - top))).toFixed(4));
       let k = -1; secs.forEach((s2, idx) => { if (s2.offsetTop <= y) k = idx; });
       if (k !== cur) {
         cur = k;
@@ -447,19 +605,22 @@ function enhance(path) {
         secs.forEach((s2, idx) => s2.classList.toggle("on", idx === k));
         const al = links[k]; if (al) { const L = rail.querySelector(".rail-list"); L.scrollTo({ left: al.offsetLeft - L.clientWidth / 2 + al.clientWidth / 2, behavior: "smooth" }); }
       }
-    };
-    addEventListener("scroll", _scr, { passive: true }); _scr();
-  }
+    }
+  };
+  _scr = () => { if (!tick) { tick = true; requestAnimationFrame(update); } };
+  addEventListener("scroll", _scr, { passive: true }); update();
 }
 function route() {
   const p = (location.hash.slice(1) || "/").split("?")[0];
   const path = pages[p] && (p !== "/why" || A.reqs) && (p !== "/builds" || B) ? p : "/";
   $("#nav").innerHTML = navItems.map(n => '<a href="#' + n[0] + '"' + (n[0] === path ? ' class="on"' : "") + ">" + n[1] + "</a>").join("");
-  $("#main").innerHTML = path === "/career" ? pages[path]() : '<div class="wrap pg">' + pages[path]() + "</div>";
+  $("#main").innerHTML = path === "/career" || path === "/builds" ? pages[path]() : '<div class="wrap pg">' + pages[path]() + "</div>";
   window.scrollTo({ top: 0, behavior: "instant" });
   enhance(path);
 }
 document.addEventListener("click", e => {
+  const sc = e.target.closest("a[data-scroll]");
+  if (sc) { e.preventDefault(); const t = document.getElementById(sc.dataset.scroll); if (t) { t.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }); t.classList.remove("flash"); void t.offsetWidth; t.classList.add("flash"); } return; }
   const a = e.target.closest("a[data-job]");
   if (!a) return;
   e.preventDefault();
